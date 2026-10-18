@@ -1,0 +1,69 @@
+<div class="container" [class.container-light-theme]="!isDark">
+  <div class="nav mt-5" [class.nav-light-theme]="!isDark">
+    <img src="assets/images/logo.svg" alt="" />
+    @if (isDark) {
+      <img
+        class="sun"
+        src="assets/images/icon-sun.svg"
+        alt=""
+        (click)="isDark = !isDark"
+      />
+    } @else {
+      <img
+        class="sun"
+        src="assets/images/icon-moon.svg"
+        alt=""
+        (click)="isDark = !isDark"
+        [class.navIcon-light-theme]="!isDark"
+      />
+    }
+  </div>
+  <div class="center">
+    <h2 [class.centerh1-light-theme]="!isDark">Extensions List</h2>
+    <div class="bt" [class.centerbutton-light-theme]="!isDark">
+      <button
+        [class.active]="all"
+        (click)="all = true; active = false; inActive = false; All()"
+      >
+        All
+      </button>
+      <button
+        [class.active]="active"
+        (click)="all = false; active = true; inActive = false; Active()"
+      >
+        Active
+      </button>
+      <button
+        [class.active]="inActive"
+        (click)="all = false; active = false; inActive = true; InActive()"
+      >
+        Inactive
+      </button>
+    </div>
+  </div>
+  <div class="contant row g-2 mb-5 justify-content-center">
+    @for (item of FilterData; track $index) {
+      <div class="box me-2 col-12 col-lg-3 col-md-4 col-sm-6" [class.box-light-theme]="!isDark" >
+        <div class="top">
+          <img [src]="item.image" alt="" />
+          <div>
+            <h5>{{ item.title }}</h5>
+            <p [class.boxp-light-theme]="!isDark" >{{ item.description }}</p>
+          </div>
+        </div>
+        <div class="bottom">
+          <button (click)="Remove(item.title)">Remove</button>
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckDefault"
+              [(ngModel)]="item.state"
+            />
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>
